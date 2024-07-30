@@ -28,13 +28,15 @@ public class ProductoService {
     }
 
     public ProductoModel updateById(ProductoModel request, Integer id){
-        ProductoModel producto = productoRepository.findById(id).get();
-
-        producto.setNOMBRE(request.getNOMBRE());
-        producto.setDESCRIPCION(request.getDESCRIPCION());
-        producto.setSTOCK(request.getSTOCK());
-
-        return producto;
+        Optional<ProductoModel> productoOpt = productoRepository.findById(id);
+        if (productoOpt.isPresent()) {
+            ProductoModel producto = productoOpt.get();
+            producto.setNOMBRE(request.getNOMBRE());
+            producto.setDESCRIPCION(request.getDESCRIPCION());
+            producto.setSTOCK(request.getSTOCK());
+            return productoRepository.save(producto);
+        }
+        return null;
     }
 
     public Boolean deleteProducto (Integer id){
