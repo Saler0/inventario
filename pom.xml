@@ -74,4 +74,17 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>nexus</id>
+			<repositories>
+				<repository>
+					<id>actividadclase9</id>
+					<name>actividadclase9</name>
+					<url>http://localhost:8081/repository/actividadclase9/</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+
 </project>
