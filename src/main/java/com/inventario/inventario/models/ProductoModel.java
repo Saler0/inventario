@@ -1,5 +1,6 @@
 package com.inventario.inventario.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,15 +9,19 @@ import jakarta.persistence.*;
 public class ProductoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("ID_PROD")
     private Integer ID_PROD;
 
     @Column
+    @JsonProperty("nombre")
     private String NOMBRE;
 
     @Column
+    @JsonProperty("descripcion")
     private String DESCRIPCION;
 
     @Column
+    @JsonProperty("stock")
     private Integer STOCK;
 
 
