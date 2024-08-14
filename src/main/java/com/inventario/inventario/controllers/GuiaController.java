@@ -1,8 +1,7 @@
-package com.inventario.inventario.controller;
+package com.inventario.inventario.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ProductoController {
-
+public class GuiaController {
 }
