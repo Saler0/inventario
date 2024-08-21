@@ -1,1 +1,1 @@
-start /B C:\maven\apache-maven-3.9.8-bin\apache-maven-3.9.8\bin\mvn spring-boot:run
+start /B java -jar C:\ProgramData\Jenkins\.jenkins\workspace\inventario-slack\target\inventario-0.0.1-SNAPSHOT.jar
