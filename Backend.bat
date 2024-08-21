@@ -1,1 +1,1 @@
-start /B java -jar C:\ProgramData\Jenkins\.jenkins\workspace\inventario-slack\target\inventario-0.0.1-SNAPSHOT.jar
+start /B java -jar C:\ProgramData\Jenkins\.jenkins\workspace\inventarioPipeline\target\inventario-0.0.1-SNAPSHOT.jar
