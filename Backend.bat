@@ -1,0 +1,1 @@
+start /B C:\maven\apache-maven-3.9.8-bin\apache-maven-3.9.8\bin\mvn spring-boot:run
