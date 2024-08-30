@@ -51,14 +51,14 @@ const ShowProducts = () => {
             show_alert("Ingrese el nombre del producto", "warning");
         } else if (descripcion.trim() === "") {
             show_alert("Ingrese la descripción del producto", "warning");
-        } else if (stock.trim() === "") {
+        } else if (stock === "") {
             show_alert("Ingrese el stock del producto", "warning");
         } else {
             if (operation === 1) {
                 parameters = {nombre:nombre.trim(), descripcion:descripcion.trim(), stock: stock};
                 method = "POST";
             } else if (operation === 2) {
-                parameters = {id_PROD:id_PROD.trim(), nombre:nombre.trim(), descripcion:descripcion.trim(), stock: stock};
+                parameters = {id_PROD:id_PROD, nombre:nombre.trim(), descripcion:descripcion.trim(), stock: stock};
                 method = "PUT";
             }
 
@@ -66,8 +66,54 @@ const ShowProducts = () => {
         }
     }
 
+    const deleteProduct = (id_PROD, nombre) => {
+        const MySwal = withReactContent(Swal);
+        MySwal.fire({
+            title: "¿Está seguro de borrar el producto " + nombre + "?",
+            icon: "question",
+            text: "Esta operación no se podrá deshacer",
+            showCancelButton: true,
+            confirmButtonText: "Borrar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setId_PROD(id_PROD);
+                submitRequest("DELETE", {id_PROD: id_PROD});
+            }
+        });
+    }
+
     const submitRequest = async (method, parameters) => {
-        
+        let endpoint;
+        let actionPerformed;
+
+        switch(method) {
+            case "POST":
+                endpoint = url;
+                actionPerformed = "creado"
+                break;
+            case "PUT":
+                endpoint = url + "/" + parameters.id_PROD;
+                actionPerformed = "editado"
+                break;
+            case "DELETE":
+                endpoint = url + "/" + parameters.id_PROD;
+                actionPerformed = "borrado"
+                break;
+            default:
+                console.log("Invalid method");
+                break;
+        }
+
+        await axios({method: method, url: endpoint, data: parameters})
+            .then(function(response) {
+                show_alert("Producto " + actionPerformed + " exitosamente", "success");
+                document.getElementById("btn-close-modal").click();
+                getProducts();
+            }).catch(function(error) {
+                show_alert("Error en la solicitud", "error");
+                console.log(error);
+            });
     }
 
     return (
@@ -76,7 +122,7 @@ const ShowProducts = () => {
                 <div className="row mt-3">
                     <div className="col-md-4 offset-md-4">
                         <div className="d-grid mx-auto">
-                            <button onClick={() => openModal(1)} className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalProducts">
+                            <button id="btn-open-modal" onClick={() => openModal(1)} className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalProducts">
                                 <i className="fa-solid fa-circle-plus"></i> Add
                             </button>
                         </div>
@@ -97,12 +143,12 @@ const ShowProducts = () => {
                                             <td>{product.descripcion}</td>
                                             <td>{product.stock}</td>
                                             <td>
-                                                <button onClick={() => openModal(2, product.id_PROD, product.nombre, product.descripcion, product.stock)} 
+                                                <button id="btn-edit-grid" onClick={() => openModal(2, product.id_PROD, product.nombre, product.descripcion, product.stock)} 
                                                     className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalProducts">
                                                     <i className="fa-solid fa-edit"></i>
                                                 </button>
                                                 &nbsp;
-                                                <button className="btn btn-danger">
+                                                <button id="btn-delete-grid" onClick={() => deleteProduct(product.id_PROD, product.nombre)} className="btn btn-danger">
                                                     <i className="fa-solid fa-trash"></i>
                                                 </button>
                                             </td>
@@ -140,13 +186,13 @@ const ShowProducts = () => {
                                 onChange={(e) => setStock(e.target.value)}></input>
                             </div>
                             <div className="d-grid col-6 mx-auto">
-                                <button className="btn btn-success">
+                                <button id="btn-save-modal" onClick={() => validateData()} className="btn btn-success">
                                     <i className="fa-solid fa-floppy-disk"></i> Guardar
                                 </button>
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" id="btn-close-modal" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
