@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  inventario-backend:
+    container_name: inventario-backend
+    restart: always
+    build:
+      context: backend
+      dockerfile: docker/Dockerfile
+    ports:
+      - 4000:4000
+    
+  inventario-frontend:
+    container_name: inventario-frontend
+    build:
+      context: frontend
+      dockerfile: docker/Dockerfile
+    ports:
+      - 3000:3000
+    links:
+      - inventario-backend
+    restart: always
+    command: ["npm", "start"]
