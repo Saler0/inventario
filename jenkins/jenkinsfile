@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    tools {
+        maven "maven-3.9.9"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                git branch: "main", url: 'https://github.com/pipecm/inventario-app.git'
+                sh "mvn -f backend/pom.xml clean package"
+                sh "npm install --prefix frontend"
+            }
+
+            post {
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "nohup java -jar -Dspring.profiles.active=selenium backend/target/inventario-0.0.1-SNAPSHOT.jar > inventario-backend.log 2>&1 &"
+                sh "nohup npm start --prefix frontend > inventario-frontend.log 2>&1 &"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "mvn -f functional-tests/pom.xml test -Dtest=InventarioChromeFunctionalTest"
+                sh "mvn -f functional-tests/pom.xml test -Dtest=InventarioFirefoxFunctionalTest"
+            }
+        }
+        stage('Stop') {
+            steps {
+                sh "kill -9 \$(ps aux | grep inventario-0.0.1-SNAPSHOT.jar | awk 'FNR == 1 {print \$2}')"
+                sh "kill -9 \$(ps aux | grep 'npm start' | awk 'FNR == 1 {print \$2}')"
+                sh "echo 'Stopped apps'"
+            }
+        }
+    }
+}
