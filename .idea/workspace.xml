@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="53b500e8-cc19-4b56-a841-17e3d19885ee" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend.bat" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Backend.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend2.bat" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Backend2.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/backend/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/InventarioApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/InventarioApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/controllers/GuiaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/controllers/GuiaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/controllers/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/controllers/ProductoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/models/ProductoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/models/ProductoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/repositories/GuiaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/repositories/GuiaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/repositories/ProductoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/repositories/ProductoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/services/GuiaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/services/GuiaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inventario/inventario/services/ProductoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inventario/inventario/services/ProductoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventario/inventario/InventarioApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/inventario/inventario/InventarioApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventario/inventario/controllers/ProductoControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/inventario/inventario/controllers/ProductoControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/inventario/inventario/services/ProductoServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/inventario/inventario/services/ProductoServiceTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2maUPkmTL97F4OTB3F2LdgrDH0P" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.InventarioApplication.executor": "Run",
+    "Maven.inventario.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "development",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Proyectos/inventario/backend"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="inventario" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="mvn" />
+                <option value="clean" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/backend" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="53b500e8-cc19-4b56-a841-17e3d19885ee" name="Changes" comment="" />
+      <created>1727314159981</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727314159981</updated>
+    </task>
+    <servers />
+  </component>
+</project>
