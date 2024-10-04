@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    tools {
+        maven "maven-3.9.9"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                git branch: "main", url: 'https://github.com/Saler0/inventario.git'
+                bat "mvn -f backend/pom.xml clean package"
+                bat "cd frontend && npm install"
+            }
+
+            post {
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                bat "start /B java -jar -Dspring.profiles.active=selenium backend/target/inventario-0.0.1-SNAPSHOT.jar > inventario-backend.log 2>&1"
+                bat "cd frontend && start /B npm start > inventario-frontend.log 2>&1"
+            }
+        }
+        stage('Test') {
+            steps {
+                bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioChromeFunctionalTest"
+                bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioFirefoxFunctionalTest"
+            }
+        }
+        stage('Stop') {
+            steps {
+                bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr java') do taskkill /F /PID %%A"
+                bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr npm') do taskkill /F /PID %%A"
+                bat "echo 'Stopped apps'"
+            }
+        }
+    }
+}
