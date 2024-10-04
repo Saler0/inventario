@@ -1,14 +1,14 @@
 pipeline {
     agent any
-
-    tools {
-        maven "maven-3.9.9"
-    }
-
     stages {
-        stage('Build') {
+        stage('Checkout from GitHub') {
             steps {
-                git branch: "main", url: 'https://github.com/Saler0/inventario.git'
+                git url: 'https://github.com/Saler0/inventario.git', branch: 'development'
+            }
+        }
+        stage('Build Frontend') {
+            steps {
+                def mvn = tool 'Maven'
                 bat "mvn -f backend/pom.xml clean package"
                 bat "cd frontend && npm install"
             }
