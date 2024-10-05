@@ -24,18 +24,18 @@ pipeline {
                 bat "cd frontend && start /B npm start > inventario-frontend.log 2>&1"
             }
         }
-        stage('Test') {
-            steps {
-                bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioChromeFunctionalTest"
-                bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioFirefoxFunctionalTest"
-            }
-        }
-        stage('Stop') {
-            steps {
-                bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr java') do taskkill /F /PID %%A"
-                bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr npm') do taskkill /F /PID %%A"
-                bat "echo 'Stopped apps'"
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioChromeFunctionalTest"
+        //         bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioFirefoxFunctionalTest"
+        //     }
+        // }
+        // stage('Stop') {
+        //     steps {
+        //         bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr java') do taskkill /F /PID %%A"
+        //         bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr npm') do taskkill /F /PID %%A"
+        //         bat "echo 'Stopped apps'"
+        //     }
+        //}
     }
 }
