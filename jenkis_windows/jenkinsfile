@@ -3,20 +3,71 @@ pipeline {
     stages {
         stage('Checkout from GitHub') {
             steps {
+                script {
+                    stageStartTime = System.currentTimeMillis() // Registro del tiempo de inicio
+                }
                 git url: 'https://github.com/Saler0/inventario.git', branch: 'development'
             }
+            post {
+                always {
+                        script {
+                            stageEndTime = System.currentTimeMillis() // Registro del tiempo de fin
+                            def duration = (stageEndTime - stageStartTime) / 1000 // Convertir a segundos
+                            def color = currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
+                            slackSend(channel: '#proyecto-inventario', attachments: [[
+                                text: "Checkout from GitHub completado en ${env.JOB_NAME} - [${env.BUILD_NUMBER}] en ${duration} segundos.",
+                                color: color
+                            ]])
+                        }
+                    }
+            }
         }
+        
         stage('Build') {
             steps {
+                script {
+                    stageStartTime = System.currentTimeMillis() // Registro del tiempo de inicio
+                }
                 bat "mvn -f backend/pom.xml clean package"
                 bat "cd frontend && npm install"
             }
-
-            // post {
-            //     success {
-            //         junit '**/target/surefire-reports/TEST-*.xml'
-            //     }
-            // }
+            post {
+                //     success {
+                //         junit '**/target/surefire-reports/TEST-*.xml'
+                //     }
+                always {
+                    script {
+                        stageEndTime = System.currentTimeMillis() // Registro del tiempo de fin
+                        def duration = (stageEndTime - stageStartTime) / 1000 // Convertir a segundos
+                        def color = currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
+                        slackSend(channel: '#proyecto-inventario', attachments: [[
+                            text: "Build ${currentBuild.result == 'SUCCESS' ? 'completado' : 'fallido'} en ${env.JOB_NAME} - [${env.BUILD_NUMBER}] en ${duration} segundos.",
+                            color: color
+                        ]])
+                    }
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    stageStartTime = System.currentTimeMillis() // Registro del tiempo de inicio
+                }
+                bat "C:\\sonar-scanner-6.2.1.4610-windows-x64\\bin\\sonar-scanner.bat -D\"sonar.projectKey=inventarioJenkins\" -D\"sonar.sources=.\" -D\"sonar.java.binaries=backend/target/classes\" -D\"sonar.host.url=http://localhost:9000\" -D\"sonar.token=sqp_30063bcfb246d62ad7d0ba3fcc34fb0c5c2384dd\""
+            }
+            post {
+                always {
+                    script {
+                        stageEndTime = System.currentTimeMillis() // Registro del tiempo de fin
+                        def duration = (stageEndTime - stageStartTime) / 1000 // Convertir a segundos
+                        def color = currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
+                        slackSend(channel: '#proyecto-inventario', attachments: [[
+                            text: "SonarQube Analysis ${currentBuild.result == 'SUCCESS' ? 'completado' : 'fallido'} en ${env.JOB_NAME} - [${env.BUILD_NUMBER}] en ${duration} segundos.",
+                            color: color
+                        ]])
+                    }
+                }
+            }
         }
         // stage('Deploy') {
         //     steps {
