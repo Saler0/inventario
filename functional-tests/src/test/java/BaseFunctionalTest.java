@@ -53,6 +53,7 @@ public abstract class BaseFunctionalTest {
 
     protected static final int WAIT_DEFAULT_DURATION_IN_SECONDS = 40;
     protected static final int WAITING_TIME_AFTER_SUBMIT_IN_SECONDS = 5;
+    protected static final int WAITING_TIME_AFTER_LOAD_PAGE = 10;
 
     private final Properties properties = new Properties();
     private final String seleniumServerUrl = getProperty(SELENIUM_SERVER_PROPERTY_KEY, DEFAULT_SELENIUM_SERVER_URL);
@@ -82,7 +83,7 @@ public abstract class BaseFunctionalTest {
     protected void testAddNewProductOK() {
         driver.get(inventarioFrontendUrl);
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_SUBMIT_IN_SECONDS));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_LOAD_PAGE));
 
         WebElement addProductButton = driver.findElement(By.id(BUTTON_OPEN_MODAL_ID));
         addProductButton.click();
@@ -127,7 +128,7 @@ public abstract class BaseFunctionalTest {
     void testEditProductOK() {
         driver.get(inventarioFrontendUrl);
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_SUBMIT_IN_SECONDS));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_LOAD_PAGE));
 
         WebElement editProductButton = driver.findElement(By.xpath(BUTTON_EDIT_PRODUCT_XPATH));
         editProductButton.click();
@@ -176,7 +177,7 @@ public abstract class BaseFunctionalTest {
     void testDeleteProductOK() {
         driver.get(inventarioFrontendUrl);
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_SUBMIT_IN_SECONDS));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_LOAD_PAGE));
 
         WebElement deleteProductButton = driver.findElement(By.xpath(BUTTON_DELETE_PRODUCT_XPATH));
         deleteProductButton.click();
