@@ -82,6 +82,8 @@ public abstract class BaseFunctionalTest {
     protected void testAddNewProductOK() {
         driver.get(inventarioFrontendUrl);
 
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_SUBMIT_IN_SECONDS));
+
         WebElement addProductButton = driver.findElement(By.id(BUTTON_OPEN_MODAL_ID));
         addProductButton.click();
 
@@ -124,6 +126,8 @@ public abstract class BaseFunctionalTest {
 
     void testEditProductOK() {
         driver.get(inventarioFrontendUrl);
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_SUBMIT_IN_SECONDS));
 
         WebElement editProductButton = driver.findElement(By.xpath(BUTTON_EDIT_PRODUCT_XPATH));
         editProductButton.click();
@@ -171,6 +175,8 @@ public abstract class BaseFunctionalTest {
 
     void testDeleteProductOK() {
         driver.get(inventarioFrontendUrl);
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAITING_TIME_AFTER_SUBMIT_IN_SECONDS));
 
         WebElement deleteProductButton = driver.findElement(By.xpath(BUTTON_DELETE_PRODUCT_XPATH));
         deleteProductButton.click();
