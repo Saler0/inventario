@@ -41,7 +41,8 @@ public abstract class BaseFunctionalTest {
     private static final String CONFIRMATION_MESSAGE_TITLE_ID = "swal2-title";
     private static final String BUTTON_MODAL_OK_XPATH = "/html/body/div[2]/div/div[6]/button[1]";
     private static final String PRODUCTS_TABLE_LAST_ROW_XPATH = "//*[@id=\"root\"]/div/div[1]/div[2]/div/div/table/tbody/tr[last()]/td[position()>1]";
-    private static final String BUTTON_EDIT_PRODUCT_XPATH = "//*[@id=\"root\"]/div/div[1]/div[2]/div/div/table/tbody/tr[last()]/td[last()]/button[1]";
+//    private static final String BUTTON_EDIT_PRODUCT_XPATH = "//*[@id=\"root\"]/div/div[1]/div[2]/div/div/table/tbody/tr[last()]/td[last()]/button[1]";
+    private static final String BUTTON_EDIT_PRODUCT_XPATH = "//tbody[@class='table-group-divider']/tr/td[5]/button[@id='btn-edit-grid']";
     private static final String BUTTON_DELETE_PRODUCT_XPATH = "//*[@id=\"root\"]/div/div[1]/div[2]/div/div/table/tbody/tr[last()]/td[last()]/button[2]";
     private static final String MODAL_DELETE_PRODUCT_XPATH = "/html/body/div[2]/div";
     private static final String BUTTON_CONFIRM_DELETE_XPATH = "/html/body/div[2]/div/div[6]/button[1]";
