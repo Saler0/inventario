@@ -32,9 +32,9 @@ pipeline {
                 bat "cd frontend && npm install"
             }
             post {
-                //     success {
-                //         junit '**/target/surefire-reports/TEST-*.xml'
-                //     }
+                //success {
+                //    junit '**/target/surefire-reports/TEST-*.xml'
+                //}
                 always {
                     script {
                         stageEndTime = System.currentTimeMillis() // Registro del tiempo de fin
@@ -53,7 +53,7 @@ pipeline {
                 script {
                     stageStartTime = System.currentTimeMillis() // Registro del tiempo de inicio
                 }
-                bat "C:\\sonar-scanner-6.2.1.4610-windows-x64\\bin\\sonar-scanner.bat -D\"sonar.projectKey=inventarioJenkins\" -D\"sonar.sources=.\" -D\"sonar.java.binaries=backend/target/classes\" -D\"sonar.host.url=http://localhost:9000\" -D\"sonar.token=sqp_30063bcfb246d62ad7d0ba3fcc34fb0c5c2384dd\""
+                bat "C:\\sonar-scanner-6.2.1.4610-windows-x64\\bin\\sonar-scanner.bat -D\"sonar.projectKey=inventarioJenkins\" -D\"sonar.sources=.\" -D\"sonar.java.binaries=backend/target/classes\" -D\"sonar.host.url=http://localhost:9000\" -D\"sonar.token=sqp_30063bcfb246d62ad7d0ba3fcc34fb0c5c2384dd\"" //recuerda colocar tu ruta local donde tienes el sonar-scanner.bat 
             }
             post {
                 always {
@@ -69,24 +69,56 @@ pipeline {
                 }
             }
         }
-        // stage('Deploy') {
-        //     steps {
-        //         bat "start /B java -jar -Dspring.profiles.active=selenium backend/target/inventario-0.0.1-SNAPSHOT.jar > inventario-backend.log 2>&1"
-        //         bat "cd frontend && start /B npm start > inventario-frontend.log 2>&1"
-        //     }
-        // }
-        // stage('Test') {
-        //     steps {
-        //         bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioChromeFunctionalTest"
-        //         bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioFirefoxFunctionalTest"
-        //     }
-        // }
-        // stage('Stop') {
-        //     steps {
-        //         bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr java') do taskkill /F /PID %%A"
-        //         bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr npm') do taskkill /F /PID %%A"
-        //         bat "echo 'Stopped apps'"
-        //     }
+        stage('Deploy') {
+            steps {
+                script {
+                    stageStartTime = System.currentTimeMillis() // Registro del tiempo de inicio
+                }
+                bat "start /B java -jar -Dspring.profiles.active=selenium backend/target/inventario-0.0.1-SNAPSHOT.jar > inventario-backend.log 2>&1"
+                bat "cd frontend && start /B npm start > inventario-frontend.log 2>&1"
+            }
+            post {
+                always {
+                    script {
+                        stageEndTime = System.currentTimeMillis() // Registro del tiempo de fin
+                        def duration = (stageEndTime - stageStartTime) / 1000 // Convertir a segundos
+                        def color = currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
+                        slackSend(channel: '#proyecto-inventario', attachments: [[
+                            text: "Deploy ${currentBuild.result == 'SUCCESS' ? 'completado' : 'fallido'} en ${env.JOB_NAME} - [${env.BUILD_NUMBER}] en ${duration} segundos.",
+                            color: color
+                        ]])
+                    }
+                }
+            }
+        }
+        stage('Functional Tests') {
+            steps {
+                script {
+                    stageStartTime = System.currentTimeMillis() // Registro del tiempo de inicio
+                }
+                bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioChromeFunctionalTest"
+                //bat "mvn -f functional-tests/pom.xml test -Dtest=InventarioFirefoxFunctionalTest"
+            }
+            post {
+                always {
+                    script {
+                        stageEndTime = System.currentTimeMillis() // Registro del tiempo de fin
+                        def duration = (stageEndTime - stageStartTime) / 1000 // Convertir a segundos
+                        def color = currentBuild.result == 'SUCCESS' ? 'good' : 'danger'
+                        slackSend(channel: '#proyecto-inventario', attachments: [[
+                            text: "Functional Tests ${currentBuild.result == 'SUCCESS' ? 'completado' : 'fallido'} en ${env.JOB_NAME} - [${env.BUILD_NUMBER}] en ${duration} segundos.",
+                            color: color
+                        ]])
+                    }
+                }
+            }
+        }
+        //stage('Stop') {
+            //steps {
+            //    bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr java') do taskkill /F /PID %%A"
+            //    bat "for /F \"tokens=5\" %%A in ('netstat -aon ^| findstr npm') do taskkill /F /PID %%A"
+            //    bat "echo 'Stopped apps'"
+            //}
         //}
     }
 }
