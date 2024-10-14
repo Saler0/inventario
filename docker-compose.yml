@@ -9,9 +9,22 @@ services:
       dockerfile: docker/Dockerfile
     ports:
       - 4000:4000
-    
+    depends_on:
+      - inventario-mysql
+    environment:
+      SPRING_APPLICATION_NAME: inventario
+      SERVER_PORT: 4000
+      SPRING_DATASOURCE_URL: jdbc:mysql://inventario-mysql:3306/inventario?useSSL=false&serverTimezone=America/Santiago&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
+      SPRING_JPA_SHOW_SQL: "true"
+      LOGGING_LEVEL_ORG_HIBERNATE_SQL: debug
+      
   inventario-frontend:
     container_name: inventario-frontend
+    restart: always
     build:
       context: frontend
       dockerfile: docker/Dockerfile
@@ -19,5 +32,20 @@ services:
       - 3000:3000
     links:
       - inventario-backend
-    restart: always
     command: ["npm", "start"]
+
+  inventario-mysql:
+    image: mysql:latest
+    container_name: inventario-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: inventario
+    ports:  # Agregar esta sección para exponer el puerto
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  mysql-data:
