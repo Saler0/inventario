@@ -123,7 +123,7 @@ const ShowProducts = () => {
                     <div className="col-md-4 offset-md-4">
                         <div className="d-grid mx-auto">
                             <button id="btn-open-modal" onClick={() => openModal(1)} className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalProducts">
-                                <i className="fa-solid fa-circle-plus"></i> añadir
+                                <i className="fa-solid fa-circle-plus"></i> add
                             </button>
                         </div>
                     </div>
