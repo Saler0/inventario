@@ -41,7 +41,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: inventario
-    ports:  # Agregar esta sección para exponer el puerto
+    ports:
       - 3306:3306
     volumes:
       - mysql-data:/var/lib/mysql
